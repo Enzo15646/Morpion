@@ -12,7 +12,7 @@ namespace Morpion
         public static void AfficherMorpion(int j, int k)
         {
 
-            for (j = 0; j < grille.GetLength(0); j++)
+            for (var y = 0; y < grille.GetLength(0); y++)
             {
                 Console.Write("\n|====|====|====|\n");
                 Console.Write("|");
