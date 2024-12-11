@@ -11,7 +11,18 @@ namespace Morpion
         // Fonction permettant l'affichage du Morpion
         public static void AfficherMorpion(int j, int k)
         {
-            
+            for (j = 0; j < grille.GetLength(0); j++)
+            {
+                Console.Write("\n|====|====|====|\n");
+                Console.Write("|");
+                for (var i = 0; i < grille.GetLength(1); i++)
+                {
+                    Console.Write(" -- ");
+                    Console.Write("|");
+                }
+
+            }
+            Console.Write("\n|====|====|====|\n");
         }
 
         // Fonction permettant de changer
@@ -55,7 +66,7 @@ namespace Morpion
 			        grille[j,k] = 10;
             while(!gagner && essais != 9)
             {
-
+                AfficherMorpion(j, k);
                 // A compléter 
                 try
                 {
