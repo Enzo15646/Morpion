@@ -11,7 +11,7 @@ namespace Morpion
         // Fonction permettant l'affichage du Morpion
         public static void AfficherMorpion(int j, int k)
         {
-            // A compléter 
+            
         }
 
         // Fonction permettant de changer
