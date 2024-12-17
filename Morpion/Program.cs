@@ -34,20 +34,30 @@ namespace Morpion
         // Bien vérifier que le joueur ne sort
         // pas du tableau et que la position
         // n'est pas déjà jouée
-        public static bool AJouer(int j, int k, int joueur)
+        public static bool AJouer(int joueur)
         {
-            // A compléter 
+
             return false;
         }
-
         // Fonction permettant de vérifier
         // si un joueur à gagner
-        public static bool Gagner(int l, int c, int joueur)
+        public static bool Gagner(int joueur)
         {
-            // A compléter 
+            for (int i = 0; i < 3; i++)
+            {
+                if ((grille[i, 0] == joueur && grille[i, 1] == joueur && grille[i, 2] == joueur) || (grille[0, i] == joueur && grille[1, i] == joueur && grille[2, i] == joueur)) // Vérification horizontale
+                {
+                    return true;
+                }
+            }
+            if ((grille[0, 0] == joueur && grille[1, 1] == joueur && grille[2, 2] == joueur) || (grille[0, 2] == joueur && grille[1, 1] == joueur && grille[2, 0] == joueur)) // Vérification verticale
+            {
+                return true;
+            }
+            
             return false;
         }
-
+         
         // Programme principal
         static void Main(string[] args)
         {
