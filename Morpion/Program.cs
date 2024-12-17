@@ -9,25 +9,27 @@ namespace Morpion
         public static int[,] grille = new int[3, 3]; // matrice pour stocker les coups joués
 
         // Fonction permettant l'affichage du Morpion
-        public static void AfficherMorpion(int j, int k)
+        public static void AfficherMorpion()
         {
-
-            for (var y = 0; y < grille.GetLength(0); y++)
+            for (int i = 0; i < 3; i++)
             {
-                Console.Write("\n|====|====|====|\n");
-                Console.Write("|");
-                for (var i = 0; i < grille.GetLength(1); i++)
+                Console.Write($"{i + 1} ");
+                for (int j = 0; j < 3; j++)
                 {
-                    Console.Write(" -- ");
-                    Console.Write("|");
-                }
+                    if (grille[i,j] == 1) Console.Write(" X ");
+                    else if (grille[i, j] == 2) Console.Write(" O ");
+                    else Console.Write(" . ");
 
+                    if (j < 2) Console.Write("|");
+                }
+                Console.WriteLine();
+                if (i < 2) Console.WriteLine("  ---|---|---");
             }
-            Console.Write("\n|====|====|====|\n");
+            Console.WriteLine();
         }
 
         // Fonction permettant de changer
-        // dans le tableau qu'elle est le 
+        // dans le tableau quel est le 
         // joueur qui à jouer
         // Bien vérifier que le joueur ne sort
         // pas du tableau et que la position
@@ -49,7 +51,7 @@ namespace Morpion
         // Programme principal
         static void Main(string[] args)
         {
-            //--- Déclarations et initialisations --
+            //--- Déclarations et initialisations ---
             int LigneDébut = Console.CursorTop;     // par rapport au sommet de la fenêtre
             int ColonneDébut = Console.CursorLeft; // par rapport au sommet de la fenêtre
 
@@ -67,7 +69,7 @@ namespace Morpion
 			        grille[j,k] = 10;
             while(!gagner && essais != 9)
             {
-                AfficherMorpion(j, k);
+                AfficherMorpion();
                 // A compléter 
                 try
                 {
