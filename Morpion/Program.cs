@@ -11,7 +11,6 @@ namespace Morpion
         // Affichage de la grille du Morpion
         public static void AfficherMorpion()
         {
-            Console.Clear();
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -40,14 +39,15 @@ namespace Morpion
         {
             if (l < 0 || l >= 3 || c < 0 || c >= 3)
             {
-                Console.Write("Vous etes en dehors des limites de la grille !");
+                Console.WriteLine("Vous etes en dehors des limites de la grille !");
                 return false;
             }
             if (grille[c, l] != 10)
             {
-                Console.Write("La case séléctionné est déjà occupée !");
+                Console.WriteLine("La case séléctionné est déjà occupée !");
                 return false;
             }
+            Console.Clear();
             grille[c, l] = joueur;
             return true;
 
@@ -67,7 +67,6 @@ namespace Morpion
             {
                 return true;
             }
-            
             return false;
         }
          
@@ -109,7 +108,6 @@ namespace Morpion
                             Console.WriteLine($"Bravo au joueur n°{joueur} tu as gagné");
                         }
                     }
-                    // A compléter 
                 }
                 catch (Exception e)
                 {
