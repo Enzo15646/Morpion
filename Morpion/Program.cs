@@ -38,7 +38,16 @@ namespace Morpion
         // n'est pas déjà jouée
         public static bool AJouer(int l, int c, int joueur)
         {
-                return false;
+            if (l < 0 || l >= 3 || c < 0 || c >= 3)
+            {
+                Console.Write("Vous etes en dehors des limites de la grille !");
+                return true;
+            }
+            if (grille[c, l] != 10)
+            {
+                Console.Write("La case séléctionné est déjà occupée !");
+            }
+            return false;
         }
         // Fonction permettant de vérifier
         // si un joueur à gagner
@@ -84,13 +93,13 @@ namespace Morpion
                 // A compléter 
                 try
                 {
-                    Console.WriteLine("Ligne   =    ");
-                    Console.WriteLine("Colonne =    ");
+                    Console.WriteLine("Ligne (1-3) =    ");
+                    Console.WriteLine("Colonne (1-3) =    ");
                     // Peut changer en fonction de comment vous avez fait votre tableau.
-                    Console.SetCursorPosition(LigneDébut + 10, ColonneDébut + 9); // Permet de manipuler le curseur dans la fenêtre 
+                    Console.SetCursorPosition(LigneDébut + 14, ColonneDébut + 5); // Permet de manipuler le curseur dans la fenêtre 
                     l = int.Parse(Console.ReadLine()) - 1; 
                     // Peut changer en fonction de comment vous avez fait votre tableau.
-                    Console.SetCursorPosition(LigneDébut + 10, ColonneDébut + 10); // Permet de manipuler le curseur dans la fenêtre 
+                    Console.SetCursorPosition(LigneDébut + 16, ColonneDébut + 6); // Permet de manipuler le curseur dans la fenêtre 
                     c = int.Parse(Console.ReadLine()) - 1;
 
                     // A compléter 
