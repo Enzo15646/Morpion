@@ -75,7 +75,7 @@ namespace Morpion
         {
             //--- Déclarations et initialisations ---
 
-            int essais = 0;    // compteur d'essais
+            int essais = 1;    // compteur d'essais
 	        int joueur = 1 ;   // 1 pour la premier joueur, 2 pour le second
 	        int l, c = 0;      // numéro de ligne et de colonne
             int i, j = 0;      // Parcourir le tableau en 2 dimensions
@@ -100,7 +100,7 @@ namespace Morpion
 
                     if (AJouer(c, l, joueur))
                     {
-                        essais++;
+                        Console.WriteLine($"Votre nombre d'essais totale est de {essais++}");
                         if (Gagner(joueur))
                         {
                             gagner = true;
