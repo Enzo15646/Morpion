@@ -41,11 +41,16 @@ namespace Morpion
             if (l < 0 || l >= 3 || c < 0 || c >= 3)
             {
                 Console.Write("Vous etes en dehors des limites de la grille !");
-                return true;
+                return false;
             }
             if (grille[c, l] != 10)
             {
                 Console.Write("La case séléctionné est déjà occupée !");
+                return false;
+            }
+            if (grille[c, l] == joueur)
+            {
+                return true;
             }
             return false;
         }
@@ -72,12 +77,10 @@ namespace Morpion
         static void Main(string[] args)
         {
             //--- Déclarations et initialisations ---
-            int LigneDébut = Console.CursorTop;     // par rapport au sommet de la fenêtre
-            int ColonneDébut = Console.CursorLeft; // par rapport au sommet de la fenêtre
 
             int essais = 0;    // compteur d'essais
 	        int joueur = 1 ;   // 1 pour la premier joueur, 2 pour le second
-	        int l, c = 0;      // numéro de ligne et de colonne
+	        int l, c ;      // numéro de ligne et de colonne
             int i, j = 0;      // Parcourir le tableau en 2 dimensions
             bool gagner = false; // Permet de vérifier si un joueur à gagné 
             bool bonnePosition = false; // Permet de vérifier si la position souhaité est disponible
@@ -90,20 +93,15 @@ namespace Morpion
             while(!gagner && essais != 9)
             {
                 AfficherMorpion();
-                // A compléter 
+                Console.WriteLine($"Joueur n°{joueur}, c'est à vous de jouer !");
                 try
                 {
-                    Console.WriteLine("Ligne (1-3) =    ");
-                    Console.WriteLine("Colonne (1-3) =    ");
-                    // Peut changer en fonction de comment vous avez fait votre tableau.
-                    Console.SetCursorPosition(LigneDébut + 14, ColonneDébut + 5); // Permet de manipuler le curseur dans la fenêtre 
-                    l = int.Parse(Console.ReadLine()) - 1; 
-                    // Peut changer en fonction de comment vous avez fait votre tableau.
-                    Console.SetCursorPosition(LigneDébut + 16, ColonneDébut + 6); // Permet de manipuler le curseur dans la fenêtre 
+                    Console.Write("Ligne (1-3) : ");
+                    l = int.Parse(Console.ReadLine()) - 1;
+
+                    Console.Write("Colonne (1-3) : ");
                     c = int.Parse(Console.ReadLine()) - 1;
-
                     // A compléter 
-
                 }
                 catch (Exception e)
                 {
