@@ -11,21 +11,23 @@ namespace Morpion
         // Fonction permettant l'affichage du Morpion
         public static void AfficherMorpion()
         {
+            Console.Clear();
             for (int i = 0; i < 3; i++)
             {
-                Console.Write($"{i + 1} ");
                 for (int j = 0; j < 3; j++)
                 {
-                    if (grille[i,j] == 1) Console.Write(" X ");
-                    else if (grille[i, j] == 2) Console.Write(" O ");
-                    else Console.Write(" . ");
+                    if (grille[i, j] == 1)
+                        Console.Write(" X ");
+                    else if (grille[i, j] == 2)
+                        Console.Write(" O ");
+                    else
+                        Console.Write(" . ");
 
                     if (j < 2) Console.Write("|");
                 }
                 Console.WriteLine();
-                if (i < 2) Console.WriteLine("  ---|---|---");
+                if (i < 2) Console.WriteLine("---+---+---");
             }
-            Console.WriteLine();
         }
 
         // Fonction permettant de changer
@@ -34,10 +36,9 @@ namespace Morpion
         // Bien vérifier que le joueur ne sort
         // pas du tableau et que la position
         // n'est pas déjà jouée
-        public static bool AJouer(int joueur)
+        public static bool AJouer(int l, int c, int joueur)
         {
-
-            return false;
+                return false;
         }
         // Fonction permettant de vérifier
         // si un joueur à gagner
@@ -68,15 +69,15 @@ namespace Morpion
             int essais = 0;    // compteur d'essais
 	        int joueur = 1 ;   // 1 pour la premier joueur, 2 pour le second
 	        int l, c = 0;      // numéro de ligne et de colonne
-            int j, k = 0;      // Parcourir le tableau en 2 dimensions
+            int i, j = 0;      // Parcourir le tableau en 2 dimensions
             bool gagner = false; // Permet de vérifier si un joueur à gagné 
             bool bonnePosition = false; // Permet de vérifier si la position souhaité est disponible
 
 	        //--- initialisation de la grille ---
             // On met chaque valeur du tableau à 10
 	        for (j=0; j < grille.GetLength(0); j++)
-		        for (k=0; k < grille.GetLength(1); k++)
-			        grille[j,k] = 10;
+		        for (i=0; i < grille.GetLength(1); i++)
+			        grille[j,i] = 10;
             while(!gagner && essais != 9)
             {
                 AfficherMorpion();
