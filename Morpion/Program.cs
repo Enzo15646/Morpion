@@ -6,9 +6,9 @@ namespace Morpion
 {
     class Program
     {
-        public static int[,] grille = new int[3, 3]; // matrice pour stocker les coups joués
+        public static int[,] grille = new int[3, 3];
 
-        // Fonction permettant l'affichage du Morpion
+        // Affichage de la grille du Morpion
         public static void AfficherMorpion()
         {
             Console.Clear();
@@ -48,11 +48,9 @@ namespace Morpion
                 Console.Write("La case séléctionné est déjà occupée !");
                 return false;
             }
-            if (grille[c, l] == joueur)
-            {
-                return true;
-            }
-            return false;
+            grille[c, l] = joueur;
+            return true;
+
         }
         // Fonction permettant de vérifier
         // si un joueur à gagner
@@ -80,10 +78,9 @@ namespace Morpion
 
             int essais = 0;    // compteur d'essais
 	        int joueur = 1 ;   // 1 pour la premier joueur, 2 pour le second
-	        int l, c ;      // numéro de ligne et de colonne
+	        int l, c = 0;      // numéro de ligne et de colonne
             int i, j = 0;      // Parcourir le tableau en 2 dimensions
             bool gagner = false; // Permet de vérifier si un joueur à gagné 
-            bool bonnePosition = false; // Permet de vérifier si la position souhaité est disponible
 
 	        //--- initialisation de la grille ---
             // On met chaque valeur du tableau à 10
@@ -93,7 +90,7 @@ namespace Morpion
             while(!gagner && essais != 9)
             {
                 AfficherMorpion();
-                Console.WriteLine($"Joueur n°{joueur}, c'est à vous de jouer !");
+                Console.WriteLine($"Joueur n°{joueur}, c'est à vous de jouer !"); // Message pour annoncer quel joueur doit jouer
                 try
                 {
                     Console.Write("Ligne (1-3) : ");
@@ -101,6 +98,17 @@ namespace Morpion
 
                     Console.Write("Colonne (1-3) : ");
                     c = int.Parse(Console.ReadLine()) - 1;
+
+                    if (AJouer(c, l, joueur))
+                    {
+                        essais++;
+                        if (Gagner(joueur))
+                        {
+                            gagner = true;
+                            AfficherMorpion();
+                            Console.WriteLine($"Bravo au joueur n°{joueur} tu as gagné");
+                        }
+                    }
                     // A compléter 
                 }
                 catch (Exception e)
@@ -114,8 +122,6 @@ namespace Morpion
             }; // Fin TQ
 
             // Fin de la partie
-            // A compléter 
-            Console.WriteLine($"Bravo au joueur n°{joueur} tu as gagné");
             Console.ReadKey();
     }
   }
