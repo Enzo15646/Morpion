@@ -115,7 +115,7 @@ namespace Morpion
 
             // Fin de la partie
             // A compléter 
-
+            Console.WriteLine($"Bravo au joueur n°{joueur} tu as gagné");
             Console.ReadKey();
     }
   }
