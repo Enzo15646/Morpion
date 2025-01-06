@@ -37,20 +37,21 @@ namespace Morpion
         // n'est pas déjà jouée
         public static bool AJouer(int l, int c, int joueur)
         {
+            Console.Clear();
             if (l < 0 || l >= 3 || c < 0 || c >= 3)
             {
                 Console.WriteLine("Vous etes en dehors des limites de la grille !");
                 return false;
             }
+
             if (grille[c, l] != 10)
             {
                 Console.WriteLine("La case séléctionné est déjà occupée !");
                 return false;
             }
-            Console.Clear();
+            
             grille[c, l] = joueur;
             return true;
-
         }
         // Fonction permettant de vérifier
         // si un joueur à gagner
@@ -58,12 +59,12 @@ namespace Morpion
         {
             for (int i = 0; i < 3; i++)
             {
-                if ((grille[i, 0] == joueur && grille[i, 1] == joueur && grille[i, 2] == joueur) || (grille[0, i] == joueur && grille[1, i] == joueur && grille[2, i] == joueur)) // Vérification horizontale
+                if ((grille[i, 0] == joueur && grille[i, 1] == joueur && grille[i, 2] == joueur) || (grille[0, i] == joueur && grille[1, i] == joueur && grille[2, i] == joueur))
                 {
                     return true;
                 }
             }
-            if ((grille[0, 0] == joueur && grille[1, 1] == joueur && grille[2, 2] == joueur) || (grille[0, 2] == joueur && grille[1, 1] == joueur && grille[2, 0] == joueur)) // Vérification verticale
+            if ((grille[0, 0] == joueur && grille[1, 1] == joueur && grille[2, 2] == joueur) || (grille[0, 2] == joueur && grille[1, 1] == joueur && grille[2, 0] == joueur))
             {
                 return true;
             }
@@ -83,14 +84,16 @@ namespace Morpion
 
 	        //--- initialisation de la grille ---
             // On met chaque valeur du tableau à 10
+
 	        for (j=0; j < grille.GetLength(0); j++)
 		        for (i=0; i < grille.GetLength(1); i++)
 			        grille[j,i] = 10;
-            while(!gagner && essais != 9)
+            while(!gagner && essais != 10)
             {
                 AfficherMorpion();
                 Console.WriteLine($"Joueur n°{joueur}, c'est à vous de jouer !"); // Message pour annoncer quel joueur doit jouer
                 try
+
                 {
                     Console.Write("Ligne (1-3) : ");
                     l = int.Parse(Console.ReadLine()) - 1;
@@ -107,14 +110,22 @@ namespace Morpion
                             AfficherMorpion();
                             Console.WriteLine($"Bravo au joueur n°{joueur} tu as gagné");
                         }
+                        else if (Gagner(joueur))
+                        {
+                            gagner= false;
+                            AfficherMorpion();
+                            Console.WriteLine("Il y a eu égalité");
+                        }
+                        else
+                        {
+                            joueur = joueur == 1 ? 2 : 1; // Changement de joueur
+                        }
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
                 }
-
-                // Changement de joueur
                 // A compléter 
 
             }; // Fin TQ
