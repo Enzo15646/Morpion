@@ -138,7 +138,8 @@ namespace Morpion
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.ToString());
+                    Console.Clear();
+                    Console.WriteLine("La saisie n'est pas valide. Veuillez rentrer un chiffre entre 1 et 3 !");
                 }
                 // A compléter 
 
