@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization.Formatters;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
 
@@ -49,7 +50,7 @@ namespace Morpion
                 Console.WriteLine("La case séléctionné est déjà occupée !");
                 return false;
             }
-            
+
             grille[c, l] = joueur;
             return true;
         }
@@ -70,28 +71,41 @@ namespace Morpion
             }
             return false;
         }
-         
+        public static bool VerifEgal()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (grille[i, j] == 10) // Une case est vide, pas d'égalité
+                        return false;
+                }
+            }
+            return true; 
+        }
+
         // Programme principal
         static void Main(string[] args)
         {
             //--- Déclarations et initialisations ---
 
             int essais = 1;    // compteur d'essais
-	        int joueur = 1 ;   // 1 pour la premier joueur, 2 pour le second
-	        int l, c = 0;      // numéro de ligne et de colonne
+            int joueur = 1;    // 1 pour la premier joueur, 2 pour le second
+            int l, c = 0;      // numéro de ligne et de colonne
             int i, j = 0;      // Parcourir le tableau en 2 dimensions
-            bool gagner = false; // Permet de vérifier si un joueur à gagné 
+            bool gagner = false; // Permet de vérifier si un joueur à gagné
 
-	        //--- initialisation de la grille ---
+
+            //--- initialisation de la grille ---
             // On met chaque valeur du tableau à 10
 
-	        for (j=0; j < grille.GetLength(0); j++)
-		        for (i=0; i < grille.GetLength(1); i++)
-			        grille[j,i] = 10;
-            while(!gagner && essais != 10)
+            for (j = 0; j < grille.GetLength(0); j++)
+                for (i = 0; i < grille.GetLength(1); i++)
+                    grille[j, i] = 10;
+            while (!gagner && essais != 10)
             {
                 AfficherMorpion();
-                Console.WriteLine($"Joueur n°{joueur}, c'est à vous de jouer !"); // Message pour annoncer quel joueur doit jouer
+                Console.WriteLine($"Joueur n°{joueur}, c'est à vous de jouer !");
                 try
 
                 {
@@ -110,11 +124,11 @@ namespace Morpion
                             AfficherMorpion();
                             Console.WriteLine($"Bravo au joueur n°{joueur} tu as gagné");
                         }
-                        else if (Gagner(joueur))
+                        else if (VerifEgal())
                         {
-                            gagner= false;
                             AfficherMorpion();
-                            Console.WriteLine("Il y a eu égalité");
+                            Console.WriteLine("Il y a eu égalité !");
+                            break; // Sortir de la boucle
                         }
                         else
                         {
@@ -132,6 +146,6 @@ namespace Morpion
 
             // Fin de la partie
             Console.ReadKey();
+        }
     }
-  }
 }
