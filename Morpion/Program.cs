@@ -16,12 +16,12 @@ namespace Morpion
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (grille[i, j] == 1)
+                    if (grille[i, j] == 1) // Permet d'ajouter 'X' à une case vide
                         Console.Write(" X ");
                     else if (grille[i, j] == 2)
-                        Console.Write(" O ");
+                        Console.Write(" O "); // Permet d'ajouter 'O' à une case vide
                     else
-                        Console.Write(" . ");
+                        Console.Write(" . "); // Permet de mettre un '.' en attendant qu'un joueur joue son tour
 
                     if (j < 2) Console.Write("|");
                 }
@@ -41,13 +41,13 @@ namespace Morpion
             Console.Clear();
             if (l < 0 || l >= 3 || c < 0 || c >= 3)
             {
-                Console.WriteLine("Vous etes en dehors des limites de la grille !");
+                Console.WriteLine("Vous etes en dehors des limites de la grille !"); // Message pour afficher l'erreur de placement
                 return false;
             }
 
             if (grille[c, l] != 10)
             {
-                Console.WriteLine("La case séléctionné est déjà occupée !");
+                Console.WriteLine("La case séléctionné est déjà occupée !"); // Message pour afficher que le case est déjà remplie
                 return false;
             }
 
@@ -60,6 +60,7 @@ namespace Morpion
         {
             for (int i = 0; i < 3; i++)
             {
+                // Vérificaton de l'alignement de 3 caractères
                 if ((grille[i, 0] == joueur && grille[i, 1] == joueur && grille[i, 2] == joueur) || (grille[0, i] == joueur && grille[1, i] == joueur && grille[2, i] == joueur))
                 {
                     return true;
@@ -77,7 +78,7 @@ namespace Morpion
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (grille[i, j] == 10) // Une case est vide, pas d'égalité
+                    if (grille[i, j] == 10) // Si une case est vide, il n'y a pas d'égalité donc on laisse false à gagner
                         return false;
                 }
             }
@@ -89,12 +90,11 @@ namespace Morpion
         {
             //--- Déclarations et initialisations ---
 
-            int essais = 1;    // compteur d'essais
-            int joueur = 1;    // 1 pour la premier joueur, 2 pour le second
-            int l, c = 0;      // numéro de ligne et de colonne
-            int i, j = 0;      // Parcourir le tableau en 2 dimensions
+            int essais = 1;          // compteur d'essais que l'on initialise à 1
+            int joueur = 1;         // 1 pour la premier joueur, 2 pour le second
+            int l, c = 0;          // numéro de ligne et de colonne
+            int i, j = 0;         // Parcourir le tableau en 2 dimensions
             bool gagner = false; // Permet de vérifier si un joueur à gagné
-
 
             //--- initialisation de la grille ---
             // On met chaque valeur du tableau à 10
@@ -105,12 +105,12 @@ namespace Morpion
             while (!gagner && essais != 10)
             {
                 AfficherMorpion();
-                Console.WriteLine($"Joueur n°{joueur}, c'est à vous de jouer !");
+                Console.WriteLine($"Joueur n°{joueur}, c'est à vous de jouer !"); // Affiche ce message tant que personne n'a gagné
                 try
 
                 {
                     Console.Write("Ligne (1-3) : ");
-                    l = int.Parse(Console.ReadLine()) - 1;
+                    l = int.Parse(Console.ReadLine()) - 1; // Permet d'optimiser l'emplacement du curseur lors d'affichage de message sur la console
 
                     Console.Write("Colonne (1-3) : ");
                     c = int.Parse(Console.ReadLine()) - 1;
@@ -120,11 +120,11 @@ namespace Morpion
                         Console.WriteLine($"Votre nombre d'essais totale est de {essais++}");
                         if (Gagner(joueur))
                         {
-                            gagner = true;
+                            gagner = true; // Rendre true gagner si on valide qu'un joueur est réussi à en aligner 3 ce qui mettre fin à la partie
                             AfficherMorpion();
                             Console.WriteLine($"Bravo au joueur n°{joueur} tu as gagné");
                         }
-                        else if (VerifEgal())
+                        else if (VerifEgal()) // Sinon si faire égalité et mettre fin à la partie
                         {
                             AfficherMorpion();
                             Console.WriteLine("Il y a eu égalité !");
@@ -136,12 +136,11 @@ namespace Morpion
                         }
                     }
                 }
-                catch (Exception e)
+                catch (Exception e) // Permet la gestion d'erreur de caractère saisie invalide
                 {
                     Console.Clear();
                     Console.WriteLine("La saisie n'est pas valide. Veuillez rentrer un chiffre entre 1 et 3 !");
                 }
-                // A compléter 
 
             }; // Fin TQ
 
